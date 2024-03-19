@@ -25,4 +25,6 @@ add_executable(Raytracer main.cpp
         Structures/SceneImage.cpp
         Structures/SceneImage.h
         Structures/Ray.h
+        tracing.cpp
+        tracing.h
 )

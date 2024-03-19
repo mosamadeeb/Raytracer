@@ -2,6 +2,7 @@
 #define PROJECT_MATERIAL_H
 
 #include "../Eigen/Dense"
+#include "PointLight.h"
 
 class Material {
 public:
