@@ -1,5 +1,5 @@
 #include "PointLight.h"
 
-void PointLight::calcIntensityAtDistance(double distance, Eigen::Vector3d &outIntensity) const {
-    outIntensity = intensity / (distance * distance);
+Eigen::Array3d PointLight::calcIntensityAtDistance(double distance) const {
+    return intensity / (distance * distance);
 }

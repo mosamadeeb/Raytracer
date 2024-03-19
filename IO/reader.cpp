@@ -36,7 +36,7 @@ void Reader::readFile(Scene &scene) {
 
         switch (tagMap[cur]) {
             case TagBackgroundColor:
-                readVector3(scene.backgroundColor);
+                readArray3(scene.backgroundColor);
                 break;
             case TagMaxRecursionDepth:
                 scene.maxRecursionDepth = readInt();
@@ -63,22 +63,22 @@ void Reader::readFile(Scene &scene) {
                 id = readInt();
 
                 mat = new Material();
-                readVector3(mat->ambientReflectance);
-                readVector3(mat->diffuseReflectance);
-                readVector3(mat->specularReflectance);
+                readArray3(mat->ambientReflectance);
+                readArray3(mat->diffuseReflectance);
+                readArray3(mat->specularReflectance);
                 mat->phongExponent = readDouble();
-                readVector3(mat->mirrorReflectance);
+                readArray3(mat->mirrorReflectance);
 
                 materials[id] = mat;
                 break;
             case TagAmbientLight:
-                readVector3(scene.ambientLight);
+                readArray3(scene.ambientLight);
                 break;
             case TagPointLight:
                 readInt(); // Light ID
 
                 readVector3(pointLight.pos);
-                readVector3(pointLight.intensity);
+                readArray3(pointLight.intensity);
 
                 scene.pointLights.push_back(pointLight);
                 break;
@@ -185,6 +185,15 @@ void Reader::readVector3(Eigen::Vector3d &vec) {
     vec[0] = x;
     vec[1] = y;
     vec[2] = z;
+}
+
+void Reader::readArray3(Eigen::Array3d &arr) {
+    double x, y, z;
+    (*stream) >> x >> y >> z;
+
+    arr[0] = x;
+    arr[1] = y;
+    arr[2] = z;
 }
 
 void Reader::readVector3Int(Eigen::Vector3i &vec) {

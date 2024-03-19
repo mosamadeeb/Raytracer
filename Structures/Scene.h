@@ -13,8 +13,8 @@
 
 class Scene {
 public:
-    Eigen::Vector3d ambientLight;
-    Eigen::Vector3d backgroundColor;
+    Eigen::Array3d ambientLight;
+    Eigen::Array3d backgroundColor;
 
     int maxRecursionDepth;
     double shadowRayEpsilon;

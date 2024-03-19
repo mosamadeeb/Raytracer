@@ -34,6 +34,7 @@ public:
     int readInt();
     double readDouble();
     void readVector3(Eigen::Vector3d&);
+    void readArray3(Eigen::Array3d&);
     void readVector3Int(Eigen::Vector3i&);
 
 private:

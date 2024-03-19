@@ -6,9 +6,9 @@
 class PointLight {
 public:
     Eigen::Vector3d pos;
-    Eigen::Vector3d intensity;
+    Eigen::Array3d intensity;
 
-    void calcIntensityAtDistance(double distance, Eigen::Vector3d& outIntensity) const;
+    Eigen::Array3d calcIntensityAtDistance(double distance) const;
 };
 
 

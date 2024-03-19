@@ -5,12 +5,17 @@
 
 class Material {
 public:
-    Eigen::Vector3d ambientReflectance;
-    Eigen::Vector3d diffuseReflectance;
-    Eigen::Vector3d specularReflectance;
+    Eigen::Array3d ambientReflectance;
+    Eigen::Array3d diffuseReflectance;
+    Eigen::Array3d specularReflectance;
 
     double phongExponent;
-    Eigen::Vector3d mirrorReflectance;
+    Eigen::Array3d mirrorReflectance;
+
+    Eigen::Array3d calcAmbient(const Eigen::Array3d& ambientLight) const;
+    Eigen::Array3d calcDiffuse(const Eigen::Vector3d& point, const Eigen::Vector3d& normal, const PointLight& light) const;
+    Eigen::Array3d calcSpecular(const Eigen::Vector3d& point, const Eigen::Vector3d& normal, const PointLight& light, const Eigen::Vector3d& eye) const;
+    Eigen::Array3d calcMirror(const Eigen::Array3d& reflectedColor) const;
 };
 
 
