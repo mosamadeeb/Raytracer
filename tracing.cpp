@@ -55,8 +55,7 @@ void traceRay(Scene& scene, Ray& ray, int bounceCount, Eigen::Array3d& outColor)
 
             if (!hasShadow) {
                 // Diffuse and Specular shading
-                outColor += obj->material->calcDiffuse(x, normal, l)
-                        + obj->material->calcSpecular(x, normal, l, -(ray.direction()));
+                outColor += obj->material->calcDiffuseSpecular(x, normal, l, -(ray.direction()));
             }
         }
 
