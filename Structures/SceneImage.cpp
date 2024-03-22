@@ -4,15 +4,15 @@ SceneImage::SceneImage(int width, int height) {
     this->width = width;
     this->height = height;
 
-    buffer = new char*[height];
+    buffer = new char*[width];
 
-    for (int i = 0; i < height; i++) {
-        buffer[i] = new char[width * 3];
+    for (int i = 0; i < width; i++) {
+        buffer[i] = new char[height * 3];
     }
 }
 
 SceneImage::~SceneImage() {
-    for (int i = 0; i < height; i++) {
+    for (int i = 0; i < width; i++) {
         delete[] buffer[i];
     }
 

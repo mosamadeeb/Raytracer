@@ -10,11 +10,12 @@ void writePPM(SceneImage &sceneImage, const char *path) {
     output << 255 << '\n';  // max color value
 
     // height rows, each consisting of width pixels, each pixel is rgb
-    for (int i = 0; i < sceneImage.height; i++) {
-        for (int j = 0; j < sceneImage.width * 3; j += 3) {
-            output << sceneImage.buffer[i][j]
-                << sceneImage.buffer[i][j + 1]
-                << sceneImage.buffer[i][j + 2];
+    for (int i = 0; i < sceneImage.width; i++) {
+        for (int j = 0; j < sceneImage.height; j++) {
+            // swap height and width indices
+            output << sceneImage.buffer[j][i * 3]
+                << sceneImage.buffer[j][i * 3 + 1]
+                << sceneImage.buffer[j][i * 3 + 2];
         }
     }
 

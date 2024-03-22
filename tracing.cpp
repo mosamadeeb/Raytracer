@@ -75,8 +75,8 @@ void renderImage(Scene& scene, SceneImage& sceneImage) {
     Ray* ray;
     Eigen::Array3d color;
 
-    for (int i = 0; i < scene.camera.height; i++) {
-        for (int j = 0; j < scene.camera.width; j++) {
+    for (int i = 0; i < scene.camera.width; i++) {
+        for (int j = 0; j < scene.camera.height; j++) {
             ray = scene.camera.constructRayThroughPixel(i, j);
 
             // Primary rays start with zero bounce count
