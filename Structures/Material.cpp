@@ -9,14 +9,18 @@ Eigen::Array3d Material::calcDiffuseSpecular(const Eigen::Vector3d& point, const
     // Vector from object to light
     Eigen::Vector3d lightVec = (light.pos - point);
 
+    // Calculate intensity at point, then normalize lightVec for the following operations
+    Eigen::Array3d attenuatedIntensity = light.calcIntensityAtDistance(lightVec.norm());
+    lightVec.normalize();
+
     // h: vector halfway between eye and I
     Eigen::Vector3d halfwayVec = (eye + lightVec).normalized();
 
     // DIF * CL/(r^2) * n.I
-    Eigen::Array3d diffuse = diffuseReflectance * light.calcIntensityAtDistance(lightVec.norm()) * fmax(0, normal.dot(lightVec));
+    Eigen::Array3d diffuse = diffuseReflectance * attenuatedIntensity * fmax(0, normal.dot(lightVec));
 
     // SPE * CL * (n.h)^p
-    Eigen::Array3d specular = specularReflectance * light.calcIntensityAtDistance(lightVec.norm()) * pow(fmax(0, normal.dot(halfwayVec)), phongExponent);
+    Eigen::Array3d specular = specularReflectance * attenuatedIntensity * pow(fmax(0, normal.dot(halfwayVec)), phongExponent);
 
     return diffuse + specular;
 }
