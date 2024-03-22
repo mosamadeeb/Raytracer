@@ -3,6 +3,9 @@ project(Raytracer)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Og")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 add_executable(Raytracer main.cpp
         Structures/Scene.h
         Structures/Object.h
