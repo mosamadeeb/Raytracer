@@ -21,8 +21,10 @@ double Triangle::calcIntersectionParameter(const Ray &distanceVec, int &objectSu
     // x = [beta, gamma, t]
     Eigen::Vector3d x = A.lu().solve(b);
 
-    // beta > 0, gamma > 0, beta + gamma < 1
-    if (x[0] > 0 && x[1] > 0 && x[0] + x[1] < 1) {
+    if (    x[0] > 0            // beta > 0
+            && x[1] > 0         // gamma > 0
+            && x[0] + x[1] < 1  // beta + gamma < 1
+            && x[2] > 0) {      // t > 0
         return x[2];
     }
 
