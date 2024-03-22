@@ -33,7 +33,7 @@ void traceRay(Scene& scene, Ray& ray, int bounceCount, Eigen::Array3d& outColor)
 
         for (PointLight& l : scene.pointLights) {
             // Shadow ray
-            Ray s = Ray::Through(x + l.pos * scene.shadowRayEpsilon, l.pos);
+            Ray s = Ray::Through(x + (l.pos - x).normalized() * scene.shadowRayEpsilon, l.pos);
             double distanceToL = (l.pos - x).norm();
 
             bool hasShadow = false;
@@ -59,7 +59,8 @@ void traceRay(Scene& scene, Ray& ray, int bounceCount, Eigen::Array3d& outColor)
         // Reflections
         if (bounceCount < scene.maxRecursionDepth) {
             // Direction: d + 2(-d.n)n
-            Ray r(x, ray.direction() + ((-ray.direction()).dot(normal)) * normal);
+            Eigen::Vector3d d = (ray.direction() + ((-ray.direction()).dot(normal)) * normal).normalized();
+            Ray r(x + d * scene.shadowRayEpsilon, d);
 
             Eigen::Array3d reflectedColor;
             traceRay(scene, r, bounceCount + 1, reflectedColor);
