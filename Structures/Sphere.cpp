@@ -18,9 +18,10 @@ double Sphere::calcIntersectionParameter(const Ray &distanceVec, int &objectSubI
     double t2 = (-B - sqrt(D)) / 2 * A;
 
     // TODO: Check if either t1 or t2 can be negative
-    return fmin(t1, t2);
+    double t = t1 > 0 ? (t2 > 0 ? fmin(t1, t2) : t1) : fmax(t2, 0);
+    return t > 0 ? t : std::numeric_limits<double>::max();
 }
 
 void Sphere::getNormalAtPoint(const Eigen::Vector3d &point, int objectSubId, Eigen::Vector3d &normalVec) {
-    normalVec = (point - pos) / radius;
+    normalVec = ((point - pos) / radius).normalized();
 }
