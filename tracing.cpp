@@ -61,7 +61,7 @@ void traceRay(Scene& scene, Ray& ray, int bounceCount, Eigen::Array3d& outColor)
         }
 
         // Reflections
-        if (bounceCount < scene.maxRecursionDepth) {
+        if (!obj->material->mirrorReflectance.isZero() && bounceCount < scene.maxRecursionDepth) {
             // Direction: d + 2(-d.n)n
             Eigen::Vector3d d = (ray.direction() + ((-ray.direction()).dot(normal)) * normal).normalized();
             Ray r(x + d * scene.shadowRayEpsilon, d);
